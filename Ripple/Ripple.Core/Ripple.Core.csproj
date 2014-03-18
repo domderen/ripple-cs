@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ripple.Core</RootNamespace>
+    <AssemblyName>Ripple.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Coretypes\Hash\Hash.cs" />
+    <Compile Include="Core\Coretypes\Hash\Hash128.cs" />
+    <Compile Include="Core\Coretypes\Hash\Hash160.cs" />
+    <Compile Include="Core\Coretypes\Hash\Hash256.cs" />
+    <Compile Include="Core\Coretypes\Hash\Prefixes\HashPrefix.cs" />
+    <Compile Include="Core\Coretypes\Hash\Prefixes\IPrefix.cs" />
+    <Compile Include="Core\Coretypes\Hash\Prefixes\LedgerSpace.cs" />
+    <Compile Include="Core\Coretypes\UInt\Number.cs" />
+    <Compile Include="Core\Coretypes\UInt\UInt.cs" />
+    <Compile Include="Core\Coretypes\UInt\UInt16.cs" />
+    <Compile Include="Core\Coretypes\UInt\UInt32.cs" />
+    <Compile Include="Core\Coretypes\UInt\UInt64.cs" />
+    <Compile Include="Core\Coretypes\UInt\UInt8.cs" />
+    <Compile Include="Core\Coretypes\UInt\UIntTranslator.cs" />
+    <Compile Include="Core\Enums\LedgerEntryType.cs" />
+    <Compile Include="Core\Enums\TransactionEngineResult.cs" />
+    <Compile Include="Core\Enums\TransactionType.cs" />
+    <Compile Include="Core\Fields\Field.cs" />
+    <Compile Include="Core\Fields\FieldSymbolics.cs" />
+    <Compile Include="Core\Fields\IEnums.cs" />
+    <Compile Include="Core\Fields\IHasField.cs" />
+    <Compile Include="Core\Fields\Type.cs" />
+    <Compile Include="Core\Fields\TypedFields.cs" />
+    <Compile Include="Core\Formats\Format.cs" />
+    <Compile Include="Core\Formats\Requirement.cs" />
+    <Compile Include="Core\Formats\SleFormat.cs" />
+    <Compile Include="Core\Formats\TxFormat.cs" />
+    <Compile Include="Core\Runtime\Value.cs" />
+    <Compile Include="Core\Serialized\BinaryParser.cs" />
+    <Compile Include="Core\Serialized\BinarySerializer.cs" />
+    <Compile Include="Core\Serialized\BytesList.cs" />
+    <Compile Include="Core\Serialized\IBytesSink.cs" />
+    <Compile Include="Core\Serialized\ISerializedType.cs" />
+    <Compile Include="Core\Serialized\MultiSink.cs" />
+    <Compile Include="Core\Serialized\TypeTranslator.cs" />
+    <Compile Include="Crypto\Ecdsa\EcdsaSignature.cs" />
+    <Compile Include="Crypto\Ecdsa\IKeyPair.cs" />
+    <Compile Include="Crypto\Ecdsa\KeyPair.cs" />
+    <Compile Include="Crypto\Ecdsa\Secp256K1.cs" />
+    <Compile Include="Crypto\Ecdsa\Seed.cs" />
+    <Compile Include="Crypto\Sjcljson\JsonEncrypt.cs" />
+    <Compile Include="Crypto\Sjcljson\JsonEscape.cs" />
+    <Compile Include="Encodings\B58IdentiferCodecs.cs" />
+    <Compile Include="Encodings\Base58\B58.cs" />
+    <Compile Include="Encodings\Base58\EncodingFormatException.cs" />
+    <Compile Include="Encodings\Common\B16.cs" />
+    <Compile Include="Encodings\Common\B64.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BouncyCastle\BouncyCastle.csproj">
+      <Project>{38872a5f-e87e-4fad-b109-8eb7b2e6a4a0}</Project>
+      <Name>BouncyCastle</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

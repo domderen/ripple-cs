@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Core", "Ripple.Core\Ripple.Core.csproj", "{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BouncyCastle", "BouncyCastle\BouncyCastle.csproj", "{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Client", "Ripple.Client\Ripple.Client.csproj", "{62D121A7-1910-4F58-BA62-EAB7EA23A41C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{16F03299-71B0-40C7-B55C-B3D21CF83046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Client.Tests.Integration", "Tests\Ripple.Client.Tests.Integration\Ripple.Client.Tests.Integration.csproj", "{EEDAF40C-81FE-4047-B197-81CBF1722427}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38872A5F-E87E-4FAD-B109-8EB7B2E6A4A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D121A7-1910-4F58-BA62-EAB7EA23A41C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D121A7-1910-4F58-BA62-EAB7EA23A41C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D121A7-1910-4F58-BA62-EAB7EA23A41C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D121A7-1910-4F58-BA62-EAB7EA23A41C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEDAF40C-81FE-4047-B197-81CBF1722427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEDAF40C-81FE-4047-B197-81CBF1722427}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEDAF40C-81FE-4047-B197-81CBF1722427}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEDAF40C-81FE-4047-B197-81CBF1722427}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEDAF40C-81FE-4047-B197-81CBF1722427} = {16F03299-71B0-40C7-B55C-B3D21CF83046}
+	EndGlobalSection
+EndGlobal
