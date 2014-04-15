@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ripple.Core.Core.Coretypes.UInt;
 using Ripple.Core.Core.Enums;
 
 namespace Ripple.Core.Core.Fields
@@ -19,9 +20,9 @@ namespace Ripple.Core.Core.Fields
             return Lookup.ContainsKey(field);
         }
 
-        public static string AsString(Field f, int i)
+        public static string AsString(Field f, Number i)
         {
-            return Lookup[f].AsString(i);
+            return Lookup[f].AsString(i.IntValue());
         }
 
         public static int AsInteger(Field f, string s)

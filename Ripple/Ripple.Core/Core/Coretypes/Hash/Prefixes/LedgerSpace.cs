@@ -9,7 +9,10 @@ namespace Ripple.Core.Core.Coretypes.Hash.Prefixes
 
         private LedgerSpace(char a)
         {
-            _bytes = BitConverter.GetBytes(a);
+            byte[] intBytes = BitConverter.GetBytes(a);
+            Array.Reverse(intBytes);
+
+            _bytes = intBytes;
         }
 
         public static LedgerSpace Account = new LedgerSpace('a');

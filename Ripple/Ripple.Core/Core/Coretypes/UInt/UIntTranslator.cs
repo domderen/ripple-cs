@@ -1,4 +1,4 @@
-﻿using Org.BouncyCastle.Math;
+﻿using Deveel.Math;
 using Ripple.Core.Core.Serialized;
 using Ripple.Core.Encodings.Common;
 

@@ -142,11 +142,18 @@ namespace Ripple.Core.Core.Fields
 
             foreach (var value in Values)
             {
-                ByCode.Add(value.Value._code, value.Value);
+                if (ByCode.ContainsKey(value.Value._code))
+                {
+                    ByCode[value.Value._code] = value.Value;
+                }
+                else
+                {
+                    ByCode.Add(value.Value._code, value.Value);
+                }
             }
 
             var values = new Field[Values.Count];
-            Array.Copy(Values.ToArray(), values, Values.Count);
+            Array.Copy(Values.Values.ToArray(), values, Values.Count);
             var sortedFields = new List<Field>(values);
             sortedFields.Sort(Comparator);
 
@@ -326,6 +333,11 @@ namespace Ripple.Core.Core.Fields
         public byte[] Bytes
         {
             get { return _bytes; }
+        }
+
+        public static string GetName(Field f)
+        {
+            return Values.SingleOrDefault(q => q.Value == f).Key;
         }
 
         public static IEnumerator<Field> Sorted(Collection<Field> fields)

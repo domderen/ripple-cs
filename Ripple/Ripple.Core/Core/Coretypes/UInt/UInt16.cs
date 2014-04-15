@@ -1,4 +1,4 @@
-﻿using Org.BouncyCastle.Math;
+﻿using Deveel.Math;
 using Ripple.Core.Core.Fields;
 using Ripple.Core.Core.Serialized;
 
@@ -16,7 +16,7 @@ namespace Ripple.Core.Core.Coretypes.UInt
         {
         }
 
-        public UInt16(Number s)
+        public UInt16(long s)
             : base(s)
         {
         }
@@ -41,7 +41,7 @@ namespace Ripple.Core.Core.Coretypes.UInt
             return 2;
         }
 
-        public override UInt16 InstanceFrom(BigInteger n)
+        public override UIntBase InstanceFrom(BigInteger n)
         {
             return new UInt16(n);
         }

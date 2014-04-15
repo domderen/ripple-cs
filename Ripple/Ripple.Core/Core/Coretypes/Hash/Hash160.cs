@@ -67,8 +67,7 @@ namespace Ripple.Core.Core.Coretypes.Hash
             {
                 if (s.StartsWith("r"))
                 {
-                    // TODO: Add this when AccountID will be implemented.
-                    // return NewInstance(AccountId.FromAddress(s).Bytes());
+                    return NewInstance(AccountId.FromAddress(s).Bytes);
                 }
 
                 return base.FromString(s);

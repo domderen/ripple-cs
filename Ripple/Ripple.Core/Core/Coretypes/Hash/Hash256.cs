@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Org.BouncyCastle.Crypto.Digests;
 using Ripple.Core.Core.Coretypes.Hash.Prefixes;
 using Ripple.Core.Core.Fields;
 using Ripple.Core.Core.Serialized;
@@ -65,12 +66,10 @@ namespace Ripple.Core.Core.Coretypes.Hash
             return PrefixedHalfSha512(HashPrefix.TransactionId, blob);
         }
 
-        // TODO: Uncomment when AccountId is implemented.
-        //public static Hash256 AccountIdLedgerIndex(AccountId accountId)
-        //{
-        //    return PrefixedHalfSha512((LedgerSpace.Account, accountId.Bytes()))
-        //    ;
-        //}
+        public static Hash256 AccountIdLedgerIndex(AccountId accountId)
+        {
+            return PrefixedHalfSha512(LedgerSpace.Account, accountId.Bytes);
+        }
 
         public override object ToJson()
         {
@@ -141,31 +140,33 @@ namespace Ripple.Core.Core.Coretypes.Hash
 
         public class HalfSha512 : IBytesSink
         {
-            private readonly HashAlgorithm _messageDigest;
+            private readonly Sha512Digest _messageDigest;
 
             public HalfSha512()
             {
-                _messageDigest = new SHA512Managed();
+                _messageDigest = new Sha512Digest();
             }
 
-            public HashAlgorithm MessageDigest
+            public Sha512Digest MessageDigest
             {
                 get { return _messageDigest; }
             }
 
             public void Update(byte[] bytes)
             {
-                _messageDigest.TransformFinalBlock(bytes, 0, bytes.Length);
+                _messageDigest.BlockUpdate(bytes, 0, bytes.Length);
             }
 
             public void Update(Hash256 hash)
             {
-                _messageDigest.TransformFinalBlock(hash.Bytes, 0, hash.Bytes.Length);
+                _messageDigest.BlockUpdate(hash.Bytes, 0, hash.Bytes.Length);
             }
 
             public Hash256 Finish()
             {
-                byte[] digest = _messageDigest.Hash;
+                var digest = new byte[64];
+
+                _messageDigest.DoFinal(digest, 0);
                 var half = new byte[32];
                 Array.Copy(digest, 0, half, 0, 32);
 
@@ -174,17 +175,17 @@ namespace Ripple.Core.Core.Coretypes.Hash
 
             public void Add(byte aByte)
             {
-                _messageDigest.TransformFinalBlock(new[] { aByte }, 0, 1);
+                _messageDigest.Update(aByte);
             }
 
             public void Add(byte[] bytes)
             {
-                _messageDigest.TransformFinalBlock(bytes, 0, bytes.Length);
+                _messageDigest.BlockUpdate(bytes, 0, bytes.Length);
             }
 
             public void Update(IPrefix prefix)
             {
-                _messageDigest.TransformFinalBlock(prefix.Bytes, 0, prefix.Bytes.Length);
+                _messageDigest.BlockUpdate(prefix.Bytes, 0, prefix.Bytes.Length);
             }
         }
     }

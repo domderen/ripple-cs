@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Deveel.Math, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\dmath.1.0.16\lib\net20\Deveel.Math.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -42,6 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\Config.cs" />
+    <Compile Include="Core\Binary\BinaryReader.cs" />
+    <Compile Include="Core\Binary\BinaryWriter.cs" />
+    <Compile Include="Core\Cache\SleCache.cs" />
+    <Compile Include="Core\Coretypes\AccountId.cs" />
+    <Compile Include="Core\Coretypes\Amount.cs" />
+    <Compile Include="Core\Coretypes\Currency.cs" />
+    <Compile Include="Core\Coretypes\Flags.cs" />
     <Compile Include="Core\Coretypes\Hash\Hash.cs" />
     <Compile Include="Core\Coretypes\Hash\Hash128.cs" />
     <Compile Include="Core\Coretypes\Hash\Hash160.cs" />
@@ -49,13 +61,23 @@
     <Compile Include="Core\Coretypes\Hash\Prefixes\HashPrefix.cs" />
     <Compile Include="Core\Coretypes\Hash\Prefixes\IPrefix.cs" />
     <Compile Include="Core\Coretypes\Hash\Prefixes\LedgerSpace.cs" />
+    <Compile Include="Core\Coretypes\Issue.cs" />
+    <Compile Include="Core\Coretypes\PathSet.cs" />
+    <Compile Include="Core\Coretypes\PrecisionException.cs" />
+    <Compile Include="Core\Coretypes\Quality.cs" />
+    <Compile Include="Core\Coretypes\RippleDate.cs" />
+    <Compile Include="Core\Coretypes\StArray.cs" />
+    <Compile Include="Core\Coretypes\StObject.cs" />
     <Compile Include="Core\Coretypes\UInt\Number.cs" />
     <Compile Include="Core\Coretypes\UInt\UInt.cs" />
     <Compile Include="Core\Coretypes\UInt\UInt16.cs" />
     <Compile Include="Core\Coretypes\UInt\UInt32.cs" />
     <Compile Include="Core\Coretypes\UInt\UInt64.cs" />
     <Compile Include="Core\Coretypes\UInt\UInt8.cs" />
+    <Compile Include="Core\Coretypes\UInt\UIntBase.cs" />
     <Compile Include="Core\Coretypes\UInt\UIntTranslator.cs" />
+    <Compile Include="Core\Coretypes\VariableLength.cs" />
+    <Compile Include="Core\Coretypes\Vector256.cs" />
     <Compile Include="Core\Enums\LedgerEntryType.cs" />
     <Compile Include="Core\Enums\TransactionEngineResult.cs" />
     <Compile Include="Core\Enums\TransactionType.cs" />
@@ -77,6 +99,24 @@
     <Compile Include="Core\Serialized\ISerializedType.cs" />
     <Compile Include="Core\Serialized\MultiSink.cs" />
     <Compile Include="Core\Serialized\TypeTranslator.cs" />
+    <Compile Include="Core\Types\Known\Sle\Entries\AccountRoot.cs" />
+    <Compile Include="Core\Types\Known\Sle\Entries\DirectoryNode.cs" />
+    <Compile Include="Core\Types\Known\Sle\Entries\Offer.cs" />
+    <Compile Include="Core\Types\Known\Sle\Entries\RippleState.cs" />
+    <Compile Include="Core\Types\Known\Sle\LedgerEntry.cs" />
+    <Compile Include="Core\Types\Known\Sle\ThreadedLedgerEntry.cs" />
+    <Compile Include="Core\Types\Known\Tx\Result\AffectedNode.cs" />
+    <Compile Include="Core\Types\Known\Tx\Result\TransactionMeta.cs" />
+    <Compile Include="Core\Types\Known\Tx\Result\TransactionResult.cs" />
+    <Compile Include="Core\Types\Known\Tx\Signed\SignedTransaction.cs" />
+    <Compile Include="Core\Types\Known\Tx\Transaction.cs" />
+    <Compile Include="Core\Types\Known\Tx\Txns\AccountSet.cs" />
+    <Compile Include="Core\Types\Known\Tx\Txns\OfferCancel.cs" />
+    <Compile Include="Core\Types\Known\Tx\Txns\OfferCreate.cs" />
+    <Compile Include="Core\Types\Known\Tx\Txns\Payment.cs" />
+    <Compile Include="Core\Types\Known\Tx\Txns\TrustSet.cs" />
+    <Compile Include="Core\Types\Ledger\Ledger.cs" />
+    <Compile Include="Core\Types\Shamap\ShaMap.cs" />
     <Compile Include="Crypto\Ecdsa\EcdsaSignature.cs" />
     <Compile Include="Crypto\Ecdsa\IKeyPair.cs" />
     <Compile Include="Crypto\Ecdsa\KeyPair.cs" />
@@ -96,14 +136,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BouncyCastle\BouncyCastle.csproj">
       <Project>{38872a5f-e87e-4fad-b109-8eb7b2e6a4a0}</Project>
       <Name>BouncyCastle</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

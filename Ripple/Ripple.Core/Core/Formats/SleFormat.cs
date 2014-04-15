@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Ripple.Core.Core.Coretypes.UInt;
 using Ripple.Core.Core.Enums;
 using Ripple.Core.Core.Fields;
 
@@ -131,7 +132,7 @@ namespace Ripple.Core.Core.Formats
             return GetLedgerFormat(LedgerEntryType.FromString(name));
         }
 
-        public static SleFormat FromNumber(int ord)
+        public static SleFormat FromNumber(Number ord)
         {
             return GetLedgerFormat(LedgerEntryType.FromNumber(ord));
         }
@@ -140,7 +141,7 @@ namespace Ripple.Core.Core.Formats
         {
             if (o is int)
             {
-                return FromNumber((int)o);
+                return FromNumber((Number)o);
             }
 
             var s = o as string;

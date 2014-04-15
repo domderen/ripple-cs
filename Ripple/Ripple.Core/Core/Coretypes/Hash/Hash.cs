@@ -1,5 +1,5 @@
 ﻿using System;
-using Org.BouncyCastle.Math;
+using Deveel.Math;
 using Org.BouncyCastle.Utilities;
 using Ripple.Core.Core.Serialized;
 using Ripple.Core.Encodings.Common;

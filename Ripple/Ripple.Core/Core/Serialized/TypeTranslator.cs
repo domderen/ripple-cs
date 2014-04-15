@@ -24,7 +24,7 @@ namespace Ripple.Core.Core.Serialized
                 case Value.JSON_ARRAY:
                     return FromJsonArray((JArray)obj);
                 case Value.JSON_OBJECT:
-                    return FromJsonObject((JObject)obj);
+                    return FromJObject((JObject)obj);
                 default:
                     return (T)obj;
             }
@@ -55,32 +55,32 @@ namespace Ripple.Core.Core.Serialized
             return obj.ToString();
         }
 
-        public T FromJsonObject(JObject jsonObject)
+        public virtual T FromJObject(JObject jsonObject)
         {
             throw new NotSupportedException();
         }
 
-        public T FromJsonArray(JArray jsonArray)
+        public virtual T FromJsonArray(JArray jsonArray)
         {
             throw new NotSupportedException();
         }
 
-        public T FromBoolean(bool b)
+        public virtual T FromBoolean(bool b)
         {
             throw new NotSupportedException();
         }
 
-        public T FromLong(long l)
+        public virtual T FromLong(long l)
         {
             throw new NotSupportedException();
         }
 
-        public T FromInteger(int i)
+        public virtual T FromInteger(int i)
         {
             throw new NotSupportedException();
         }
 
-        public T FromDouble(double d)
+        public virtual T FromDouble(double d)
         {
             throw new NotSupportedException();
         }
@@ -117,12 +117,12 @@ namespace Ripple.Core.Core.Serialized
             return FromBytes(B16.Decode(hex));
         }
 
-        public JObject ToJObject(T obj)
+        public virtual JObject ToJObject(T obj)
         {
             throw new NotSupportedException();
         }
 
-        public JArray ToJArray(T obj)
+        public virtual JArray ToJArray(T obj)
         {
             throw new NotSupportedException();
         }

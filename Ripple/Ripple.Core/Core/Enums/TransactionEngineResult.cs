@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Ripple.Core.Core.Coretypes.UInt;
 
 namespace Ripple.Core.Core.Enums
 {
@@ -297,6 +298,11 @@ namespace Ripple.Core.Core.Enums
         public int AsInteger
         {
             get { return _ord; }
+        }
+
+        public static TransactionEngineResult FromNumber(Number i)
+        {
+            return ByCode[i.IntValue()];
         }
 
         public static TransactionEngineResult FromNumber(int i)

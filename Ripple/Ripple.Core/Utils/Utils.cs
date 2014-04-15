@@ -35,8 +35,7 @@ namespace Ripple.Core.Utils
         {
             _digest.Dispose();
             _digest = new SHA256CryptoServiceProvider();
-            _digest.TransformFinalBlock(input, offset, length);
-            byte[] first = _digest.Hash;
+            byte[] first = _digest.ComputeHash(input, offset, length);
             return _digest.ComputeHash(first);
         }
 
