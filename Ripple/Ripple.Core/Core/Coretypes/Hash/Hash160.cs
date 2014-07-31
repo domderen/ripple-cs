@@ -12,25 +12,26 @@ namespace Ripple.Core.Core.Coretypes.Hash
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.Hash160Field TakerPaysIssuer = new Hash160Field(Field.TakerPaysIssuer);
         public static TypedFields.Hash160Field TakerGetsCurrency = new Hash160Field(Field.TakerGetsCurrency);
         public static TypedFields.Hash160Field TakerPaysCurrency = new Hash160Field(Field.TakerPaysCurrency);
@@ -51,7 +52,7 @@ namespace Ripple.Core.Core.Coretypes.Hash
             }
         }
 
-        public class Translator : HashTranslator<Hash160>
+        public class OutTranslator : OutHashTranslator<Hash160>
         {
             public override Hash160 NewInstance(byte[] b)
             {
@@ -72,6 +73,10 @@ namespace Ripple.Core.Core.Coretypes.Hash
 
                 return base.FromString(s);
             }
+        }
+
+        public class InTranslator : InHashTranslator<Hash160>
+        {
         }
     }
 }

@@ -31,7 +31,8 @@ namespace Ripple.Core.Core.Coretypes.UInt
         {
         }
 
-        public static TypeTranslator<UInt16> Translate = new UInt16Translator();
+        public static OutTypeTranslator<UInt16> OutTranslate = new OutUInt16Translator();
+        public static InTypeTranslator<UInt16> InTranslate = new InUInt16Translator();
         public static TypedFields.UInt16Field LedgerEntryType = new UInt16Field(Field.LedgerEntryType);
         public static TypedFields.UInt16Field TransactionType = new UInt16Field(Field.TransactionType);
 
@@ -53,25 +54,25 @@ namespace Ripple.Core.Core.Coretypes.UInt
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
-        private class UInt16Translator : UIntTranslator<UInt16>
+        private class OutUInt16Translator : OutUIntTranslator<UInt16>
         {
             public override UInt16 NewInstance(BigInteger i)
             {
@@ -82,6 +83,10 @@ namespace Ripple.Core.Core.Coretypes.UInt
             {
                 return 2;
             }
+        }
+
+        private class InUInt16Translator : InUIntTranslator<UInt16>
+        {
         }
 
         private class UInt16Field : TypedFields.UInt16Field

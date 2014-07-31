@@ -35,7 +35,7 @@ namespace Ripple.Core.Core.Types.Known.Tx.Result
                 {
                     EngineResult = TransactionEngineResult.FromString(json.GetValue("engine_result").ToObject<string>());
                     Validated = json.GetValue("validated").ToObject<bool>();
-                    LedgerHash = Hash256.Translate.FromString(json.GetValue("ledger_hash").ToObject<string>());
+                    LedgerHash = Hash256.OutTranslate.FromString(json.GetValue("ledger_hash").ToObject<string>());
                     LedgerIndex = new UInt32(json.GetValue("ledger_index").ToObject<long>());
 
                     JToken transaction;
@@ -117,8 +117,8 @@ namespace Ripple.Core.Core.Types.Known.Tx.Result
 
                         var tx = json.GetValue("tx_blob").ToObject<string>();
                         byte[] decodedTx = B16.Decode(tx);
-                        Meta = (TransactionMeta)StObject.Translate.FromHex(json.GetValue("meta").ToObject<string>());
-                        Txn = (Transaction)StObject.Translate.FromBytes(decodedTx);
+                        Meta = (TransactionMeta)StObject.OutTranslate.FromHex(json.GetValue("meta").ToObject<string>());
+                        Txn = (Transaction)StObject.OutTranslate.FromBytes(decodedTx);
                         Hash = Hash256.TransactionId(decodedTx);
                         Txn.Add(Field.hash, Hash);
 

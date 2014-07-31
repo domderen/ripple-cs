@@ -354,7 +354,8 @@ namespace Ripple.Core.Core.Fields
 
         public static Field FromCode(int integer)
         {
-            return ByCode[integer];
+            Field val;
+            return ByCode.TryGetValue(integer, out val) ? val : null;
         }
 
         public static byte[] AsBytes(Field field)
@@ -414,6 +415,11 @@ namespace Ripple.Core.Core.Fields
         public bool IsSigningField()
         {
             return IsSerialized() && this != TxnSignature;
+        }
+
+        public override string ToString()
+        {
+            return Values.Single(q => q.Value == this).Key;
         }
     }
 }

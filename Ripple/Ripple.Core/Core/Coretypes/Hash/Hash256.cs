@@ -15,7 +15,8 @@ namespace Ripple.Core.Core.Coretypes.Hash
         {
         }
 
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.Hash256Field LedgerHash = new Hash256Field(Field.LedgerHash);
         public static TypedFields.Hash256Field ParentHash = new Hash256Field(Field.ParentHash);
         public static TypedFields.Hash256Field TransactionHash = new Hash256Field(Field.TransactionHash);
@@ -73,22 +74,22 @@ namespace Ripple.Core.Core.Coretypes.Hash
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
         public int Nibblet(int depth)
@@ -122,7 +123,7 @@ namespace Ripple.Core.Core.Coretypes.Hash
             }
         }
 
-        public class Translator : HashTranslator<Hash256>
+        public class OutTranslator : OutHashTranslator<Hash256>
         {
             public override Hash256 NewInstance(byte[] b)
             {
@@ -133,6 +134,10 @@ namespace Ripple.Core.Core.Coretypes.Hash
             {
                 return 32;
             }
+        }
+
+        public class InTranslator : InHashTranslator<Hash256>
+        {
         }
 
         public class Hash256Map<TValue> : SortedDictionary<Hash256, TValue>

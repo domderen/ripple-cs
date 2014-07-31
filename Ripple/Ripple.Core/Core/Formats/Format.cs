@@ -31,5 +31,13 @@ namespace Ripple.Core.Core.Formats
         {
             _requirementEnumMap.Add(f, r);
         }
+
+        public IDictionary<Field, Requirement> RequirementEnumMap
+        {
+            get
+            {
+                return this._requirementEnumMap;
+            }
+        }
     }
 }

@@ -1,11 +1,14 @@
-﻿using System;
-using System.Globalization;
-using Deveel.Math;
-using NUnit.Framework;
-using Ripple.Core.Core.Coretypes;
-
-namespace Ripple.Core.Tests.Unit.Core.Coretypes
+﻿namespace Ripple.Core.Tests.Unit.Core.Coretypes
 {
+    using System;
+    using System.Globalization;
+
+    using Deveel.Math;
+
+    using NUnit.Framework;
+
+    using Ripple.Core.Core.Coretypes;
+
     [TestFixture]
     public class CurrencyTests
     {
@@ -20,22 +23,23 @@ namespace Ripple.Core.Tests.Unit.Core.Coretypes
             Assert.AreEqual("01/24/2014 02:22:10", demurrage.IntrestStart.Date.ToString(CultureInfo.InvariantCulture));
         }
 
-        //[Test]
-        //public void TestDemurragingRate() 
-        //{
-        //    var amount = new BigDecimal("100");
-        //    var factor = new BigDecimal("0.995");
-        //    var rate = Currency.Demurrage.CalculateRate(factor, new TimeSpan(365, 0, 0, 0));
+        [Test]
+        public void TestDemurragingRate()
+        {
+            var amount = new BigDecimal("100");
+            var factor = new BigDecimal("0.995");
+            var rate = Currency.Demurrage.CalculateRate(factor, new TimeSpan(365, 0, 0, 0));
 
-        //    Console.WriteLine("The starting amount is: " + amount);
-        //    Console.WriteLine("The demurrage factor:   " + factor);
-        //    Console.WriteLine("The rate:               " + rate);
-        //    Console.WriteLine();
+            Console.WriteLine("The starting amount is: " + amount);
+            Console.WriteLine("The demurrage factor:   " + factor);
+            Console.WriteLine("The rate:               " + rate);
+            Console.WriteLine();
 
-        //    for (int days = 1; days < 366 ; days++) {
-        //        BigDecimal reduced = Currency.Demurrage.ApplyRate(amount, rate, new TimeSpan(days, 0, 0, 0));
-        //        Console.WriteLine(string.Format("After {0} days is {1}",  days, reduced));
-        //    }
-        //}
+            for (int days = 1; days < 366; days++)
+            {
+                var reduced = Currency.Demurrage.ApplyRate(amount, rate, new TimeSpan(days, 0, 0, 0));
+                Console.WriteLine("After {0} days is {1}", days, reduced);
+            }
+        }
     }
 }

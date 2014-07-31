@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 
 namespace Ripple.Core.Core.Runtime
 {
+    using System;
+
     public enum Value
     {
         UNKNOWN,
@@ -25,6 +27,49 @@ namespace Ripple.Core.Core.Runtime
     {
         public static Value TypeOf(object obj)
         {
+            try
+            {
+                var jToken = (JToken)obj;
+
+                if (jToken.Type == JTokenType.String)
+                {
+                    return Value.STRING;
+                }
+
+                if (jToken.Type == JTokenType.Bytes)
+                {
+                    return Value.BYTE;
+                }
+
+                if (jToken.Type == JTokenType.Float)
+                {
+                    return Value.FLOAT;
+                }
+
+                if (jToken.Type == JTokenType.Integer)
+                {
+                    return Value.INTEGER;
+                }
+
+                if (jToken.Type == JTokenType.Object)
+                {
+                    return Value.JSON_OBJECT;
+                }
+
+                if (jToken.Type == JTokenType.Array)
+                {
+                    return Value.JSON_ARRAY;
+                }
+
+                if (jToken.Type == JTokenType.Boolean)
+                {
+                    return Value.BOOLEAN;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
             if (obj is string)
             {
                 return Value.STRING;

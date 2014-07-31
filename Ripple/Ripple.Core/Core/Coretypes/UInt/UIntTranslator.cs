@@ -4,7 +4,7 @@ using Ripple.Core.Encodings.Common;
 
 namespace Ripple.Core.Core.Coretypes.UInt
 {
-    public abstract class UIntTranslator<T> : TypeTranslator<T> where T : UInt<T>
+    public abstract class OutUIntTranslator<T> : OutTypeTranslator<T> where T : UInt<T>
     {
         public abstract T NewInstance(BigInteger i);
         public abstract int ByteWidth();
@@ -14,7 +14,27 @@ namespace Ripple.Core.Core.Coretypes.UInt
             return NewInstance(new BigInteger(1, parser.Read(ByteWidth())));
         }
 
-        public new object ToJson(T obj)
+        public override T FromLong(long aLong)
+        {
+            return NewInstance(BigInteger.ValueOf(aLong));
+        }
+
+        public override T FromString(string value)
+        {
+            int radix = this.ByteWidth() <= 4 ? 10 : 16;
+            return NewInstance(new BigInteger(value, radix));
+        }
+
+        public override T FromInteger(int integer)
+        {
+            return FromLong((integer));
+        }
+    }
+
+    public abstract class InUIntTranslator<T> : InTypeTranslator<T>
+        where T : UInt<T>
+    {
+        public override object ToJson(T obj)
         {
             if (obj.GetByteWidth() <= 4)
             {
@@ -24,27 +44,12 @@ namespace Ripple.Core.Core.Coretypes.UInt
             return ToString(obj);
         }
 
-        public new T FromLong(long aLong)
-        {
-            return NewInstance(BigInteger.ValueOf(aLong));
-        }
-
-        public new T FromString(string value)
-        {
-            return NewInstance(new BigInteger(value, 16));
-        }
-
-        public new T FromInteger(int integer)
-        {
-            return FromLong((integer));
-        }
-
-        public new string ToString(T obj)
+        public override string ToString(T obj)
         {
             return B16.ToString(obj.ToByteArray());
         }
 
-        public new void ToBytesSink(T obj, IBytesSink to)
+        public override void ToBytesSink(T obj, IBytesSink to)
         {
             to.Add(obj.ToByteArray());
         }

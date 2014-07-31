@@ -23,6 +23,14 @@ namespace Ripple.Core.Core.Types.Ledger
 
         private RippleDate _closeDate;
 
+        public UInt32 Version
+        {
+            get
+            {
+                return this._version;
+            }
+        }
+
         public static Ledger FromParser(BinaryParser parser)
         {
             return FromReader(new BinaryReader(parser));

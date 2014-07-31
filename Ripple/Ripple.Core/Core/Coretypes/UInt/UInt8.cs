@@ -32,7 +32,8 @@ namespace Ripple.Core.Core.Coretypes.UInt
         {
         }
 
-        public static TypeTranslator<UInt8> Translate = new UInt8Translator();
+        public static OutTypeTranslator<UInt8> OutTranslate = new OutUInt8Translator();
+        public static InTypeTranslator<UInt8> InTranslate = new InUInt8Translator();
         public static TypedFields.UInt8Field CloseResolution = new UInt8Field(Field.CloseResolution);
         public static TypedFields.UInt8Field TemplateEntryType = new UInt8Field(Field.TemplateEntryType);
         public static TypedFields.UInt8Field TransactionResult = new UInt8Field(Field.TransactionResult);
@@ -54,25 +55,25 @@ namespace Ripple.Core.Core.Coretypes.UInt
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
-        private class UInt8Translator : UIntTranslator<UInt8>
+        private class OutUInt8Translator : OutUIntTranslator<UInt8>
         {
             public override UInt8 NewInstance(BigInteger i)
             {
@@ -83,6 +84,10 @@ namespace Ripple.Core.Core.Coretypes.UInt
             {
                 return 1;
             }
+        }
+
+        private class InUInt8Translator : InUIntTranslator<UInt8>
+        {
         }
 
         private class UInt8Field : TypedFields.UInt8Field

@@ -10,27 +10,28 @@ namespace Ripple.Core.Core.Coretypes.Hash
         {
         }
 
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.Hash128Field EmailHash = new Hash128Field(Field.EmailHash);
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
         public class Hash128Field : TypedFields.Hash128Field
@@ -48,7 +49,7 @@ namespace Ripple.Core.Core.Coretypes.Hash
             }
         }
 
-        public class Translator : HashTranslator<Hash128>
+        public class OutTranslator : OutHashTranslator<Hash128>
         {
             public override Hash128 NewInstance(byte[] b)
             {
@@ -59,6 +60,10 @@ namespace Ripple.Core.Core.Coretypes.Hash
             {
                 return 16;
             }
+        }
+
+        public class InTranslator : InHashTranslator<Hash128>
+        {
         }
     }
 }

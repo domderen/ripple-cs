@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Core", "Ripple.Core\Ripple.Core.csproj", "{B9110BA7-E156-40F8-B54D-E4C2A7AADD01}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Client.Tests.Integration", "Tests\Ripple.Client.Tests.Integration\Ripple.Client.Tests.Integration.csproj", "{EEDAF40C-81FE-4047-B197-81CBF1722427}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripple.Core.Tests.Unit", "Tests\Ripple.Core.Tests.Unit\Ripple.Core.Tests.Unit.csproj", "{B3D462B5-2092-4C3B-B733-C4E011852D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deveel.Math", "Deveel.Math\Deveel.Math.csproj", "{DAB16486-ED07-4D2D-8E09-DB259C583F02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{B3D462B5-2092-4C3B-B733-C4E011852D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3D462B5-2092-4C3B-B733-C4E011852D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3D462B5-2092-4C3B-B733-C4E011852D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAB16486-ED07-4D2D-8E09-DB259C583F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAB16486-ED07-4D2D-8E09-DB259C583F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAB16486-ED07-4D2D-8E09-DB259C583F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAB16486-ED07-4D2D-8E09-DB259C583F02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

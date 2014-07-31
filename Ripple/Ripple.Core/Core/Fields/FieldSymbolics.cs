@@ -20,9 +20,9 @@ namespace Ripple.Core.Core.Fields
             return Lookup.ContainsKey(field);
         }
 
-        public static string AsString(Field f, Number i)
+        public static string AsString(Field f, int i)
         {
-            return Lookup[f].AsString(i.IntValue());
+            return Lookup[f].AsString(i);
         }
 
         public static int AsInteger(Field f, string s)

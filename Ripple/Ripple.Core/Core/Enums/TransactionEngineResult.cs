@@ -15,11 +15,6 @@ namespace Ripple.Core.Core.Enums
         {
             ByName.Add("telLOCAL_ERROR", telLOCAL_ERROR);
             ByName.Add("telBAD_DOMAIN", telBAD_DOMAIN);
-
-            ByName.Add("telLOCAL_ERROR", telLOCAL_ERROR);
-            ByName.Add("telBAD_DOMAIN", telBAD_DOMAIN);
-            ByName.Add("telLOCAL_ERROR", telLOCAL_ERROR);
-            ByName.Add("telBAD_DOMAIN", telBAD_DOMAIN);
             ByName.Add("telBAD_PATH_COUNT", telBAD_PATH_COUNT);
             ByName.Add("telBAD_PUBLIC_KEY", telBAD_PUBLIC_KEY);
             ByName.Add("telFAILED_PROCESSING", telFAILED_PROCESSING);
@@ -207,8 +202,6 @@ namespace Ripple.Core.Core.Enums
         {
             get
             {
-                yield return telLOCAL_ERROR;
-                yield return telBAD_DOMAIN;
                 yield return telLOCAL_ERROR;
                 yield return telBAD_DOMAIN;
                 yield return telBAD_PATH_COUNT;

@@ -111,7 +111,7 @@ namespace Ripple.Core.Core.Coretypes.Hash
             return hash;
         }
 
-        public abstract class HashTranslator<T> : TypeTranslator<T> where T : Hash<T>
+        public abstract class OutHashTranslator<T> : OutTypeTranslator<T> where T : Hash<T>
         {
             public abstract T NewInstance(byte[] b);
             public abstract int ByteWidth();
@@ -121,14 +121,17 @@ namespace Ripple.Core.Core.Coretypes.Hash
                 return NewInstance(parser.Read(ByteWidth()));
             }
 
-            public override object ToJson(T obj)
-            {
-                return B16.ToString(obj.HashBytes);
-            }
-
             public override T FromString(string s)
             {
                 return NewInstance(B16.Decode(s));
+            }
+        }
+
+        public abstract class InHashTranslator<T> : InTypeTranslator<T> where T : Hash<T>
+        {
+            public override object ToJson(T obj)
+            {
+                return B16.ToString(obj.HashBytes);
             }
 
             public override void ToBytesSink(T obj, IBytesSink to)

@@ -7,7 +7,8 @@ namespace Ripple.Core.Core.Coretypes
 {
     public class VariableLength : ISerializedType
     {
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.VariableLengthField PublicKey = new VariableLengthField(Field.PublicKey);
         public static TypedFields.VariableLengthField MessageKey = new VariableLengthField(Field.MessageKey);
         public static TypedFields.VariableLengthField SigningPubKey = new VariableLengthField(Field.SigningPubKey);
@@ -29,25 +30,25 @@ namespace Ripple.Core.Core.Coretypes
 
         public object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
-        public class Translator : TypeTranslator<VariableLength>
+        public class OutTranslator : OutTypeTranslator<VariableLength>
         {
             public override VariableLength FromParser(BinaryParser parser, int? hint)
             {
@@ -59,6 +60,14 @@ namespace Ripple.Core.Core.Coretypes
                 return new VariableLength(parser.Read((int)hint));
             }
 
+            public override VariableLength FromString(string s)
+            {
+                return new VariableLength(Hex.Decode(s));
+            }
+        }
+
+        public class InTranslator : InTypeTranslator<VariableLength>
+        {
             public override object ToJson(VariableLength obj)
             {
                 return ToString(obj);
@@ -67,11 +76,6 @@ namespace Ripple.Core.Core.Coretypes
             public override string ToString(VariableLength obj)
             {
                 return B16.ToString(obj._buffer);
-            }
-
-            public override VariableLength FromString(string s)
-            {
-                return new VariableLength(Hex.Decode(s));
             }
 
             public override void ToBytesSink(VariableLength obj, IBytesSink to)

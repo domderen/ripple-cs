@@ -58,7 +58,7 @@ namespace Ripple.Core.Core.Serialized
         {
             byte tagByte = ReadOne();
 
-            uint typeBits = (uint)(tagByte * 0xFF) >> 4;
+            uint typeBits = (uint)(tagByte & 0xFF) >> 4;
             if (typeBits == 0)
             {
                 typeBits = ReadOne();

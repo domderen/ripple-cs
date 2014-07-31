@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ripple.Core</RootNamespace>
     <AssemblyName>Ripple.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,15 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Deveel.Math, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\dmath.1.0.16\lib\net20\Deveel.Math.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -116,7 +114,14 @@
     <Compile Include="Core\Types\Known\Tx\Txns\Payment.cs" />
     <Compile Include="Core\Types\Known\Tx\Txns\TrustSet.cs" />
     <Compile Include="Core\Types\Ledger\Ledger.cs" />
+    <Compile Include="Core\Types\Shamap\IItem.cs" />
+    <Compile Include="Core\Types\Shamap\LedgerEntryLeafNode.cs" />
+    <Compile Include="Core\Types\Shamap\NodeStore.cs" />
+    <Compile Include="Core\Types\Shamap\NodeType.cs" />
     <Compile Include="Core\Types\Shamap\ShaMap.cs" />
+    <Compile Include="Core\Types\Shamap\ShaMapInnerNode.cs" />
+    <Compile Include="Core\Types\Shamap\ShaMapLeafNode.cs" />
+    <Compile Include="Core\Types\Shamap\ShaMapNode.cs" />
     <Compile Include="Crypto\Ecdsa\EcdsaSignature.cs" />
     <Compile Include="Crypto\Ecdsa\IKeyPair.cs" />
     <Compile Include="Crypto\Ecdsa\KeyPair.cs" />
@@ -133,12 +138,17 @@
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Core\Types\Shamap\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BouncyCastle\BouncyCastle.csproj">
       <Project>{38872a5f-e87e-4fad-b109-8eb7b2e6a4a0}</Project>
       <Name>BouncyCastle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Deveel.Math\Deveel.Math.csproj">
+      <Project>{dab16486-ed07-4d2d-8e09-db259c583f02}</Project>
+      <Name>Deveel.Math</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

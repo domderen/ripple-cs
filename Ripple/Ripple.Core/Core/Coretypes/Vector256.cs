@@ -11,7 +11,8 @@ namespace Ripple.Core.Core.Coretypes
 {
     public class Vector256 : List<Hash256>, ISerializedType
     {
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.Vector256Field Indexes = new Vector256Field(Field.Indexes);
         public static TypedFields.Vector256Field Hashes = new Vector256Field(Field.Hashes);
         public static TypedFields.Vector256Field Features = new Vector256Field(Field.Features);
@@ -35,12 +36,12 @@ namespace Ripple.Core.Core.Coretypes
 
         public byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public void ToBytesSink(IBytesSink to)
@@ -51,7 +52,7 @@ namespace Ripple.Core.Core.Coretypes
             }
         }
 
-        public class Translator : TypeTranslator<Vector256>
+        public class OutTranslator : OutTypeTranslator<Vector256>
         {
             public override Vector256 FromParser(BinaryParser parser, int? hint)
             {
@@ -61,17 +62,12 @@ namespace Ripple.Core.Core.Coretypes
                     hint = parser.Size;
                 }
 
-                for (int i = 0; i < hint/32; i++)
+                for (int i = 0; i < hint / 32; i++)
                 {
-                    vector256.Add(Hash256.Translate.FromParser(parser));
+                    vector256.Add(Hash256.OutTranslate.FromParser(parser));
                 }
 
                 return vector256;
-            }
-
-            public override JArray ToJArray(Vector256 obj)
-            {
-                return obj.ToJArray();
             }
 
             public override Vector256 FromJsonArray(JArray jsonArray)
@@ -92,6 +88,14 @@ namespace Ripple.Core.Core.Coretypes
                 }
 
                 return vector;
+            }
+        }
+
+        public class InTranslator : InTypeTranslator<Vector256>
+        {
+            public override JArray ToJArray(Vector256 obj)
+            {
+                return obj.ToJArray();
             }
         }
 

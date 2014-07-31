@@ -12,7 +12,8 @@ namespace Ripple.Core.Core.Coretypes
         public static byte PathSeparatorByte = 0xFF;
         public static byte PathsetEndByte = 0x00;
 
-        public static Translator Translate = new Translator();
+        public static OutTranslator OutTranslate = new OutTranslator();
+        public static InTranslator InTranslate = new InTranslator();
         public static TypedFields.PathSetField Paths = new PathSetField(Field.Paths);
 
         public object ToJson()
@@ -70,12 +71,12 @@ namespace Ripple.Core.Core.Coretypes
 
         public string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public class Path : List<Hop>
@@ -171,12 +172,12 @@ namespace Ripple.Core.Core.Coretypes
 
                     if (Account != null)
                     {
-                        obj.Add("account", new JObject(AccountId.Translate.ToJson(Account)));
+                        obj.Add("account", new JObject(AccountId.InTranslate.ToJson(Account)));
                     }
 
                     if (Issuer != null)
                     {
-                        obj.Add("issuer", new JObject(AccountId.Translate.ToJson(Issuer)));
+                        obj.Add("issuer", new JObject(AccountId.InTranslate.ToJson(Issuer)));
                     }
 
                     if (CurrencyString != null)
@@ -220,7 +221,7 @@ namespace Ripple.Core.Core.Coretypes
 
             public void SetCurrency(string currency)
             {
-                Currency = Currency.Translate.FromString(currency);
+                Currency = Currency.OutTranslate.FromString(currency);
             }
 
             public void SetCurrency(byte[] read)
@@ -249,7 +250,7 @@ namespace Ripple.Core.Core.Coretypes
             }
         }
 
-        public class Translator : TypeTranslator<PathSet>
+        public class OutTranslator : OutTypeTranslator<PathSet>
         {
             public override PathSet FromParser(BinaryParser parser, int? hint)
             {
@@ -282,17 +283,17 @@ namespace Ripple.Core.Core.Coretypes
 
                     if ((type & Hop.TypeAccount) != 0)
                     {
-                        hop.Account = AccountId.Translate.FromParser(parser);
+                        hop.Account = AccountId.OutTranslate.FromParser(parser);
                     }
 
                     if ((type & Hop.TypeCurrency) != 0)
                     {
-                        hop.Currency = Currency.Translate.FromParser(parser);
+                        hop.Currency = Currency.OutTranslate.FromParser(parser);
                     }
 
                     if ((type & Hop.TypeIssuer) != 0)
                     {
-                        hop.Issuer = AccountId.Translate.FromParser(parser);
+                        hop.Issuer = AccountId.OutTranslate.FromParser(parser);
                     }
                 }
 
@@ -320,6 +321,10 @@ namespace Ripple.Core.Core.Coretypes
 
                 return paths;
             }
+        }
+
+        public class InTranslator : InTypeTranslator<PathSet>
+        {
         }
 
         private class PathSetField : TypedFields.PathSetField

@@ -99,8 +99,8 @@ namespace Ripple.Core.Core.Types.Known.Sle.Entries
             // Where 'this' is an AffectedNode nodeAsPrevious.
             var executed = new StObject
             {
-                {Amount.TakerPays, finalFields[Amount.TakerPays].Substract(TakerPays).Abs()},
-                {Amount.TakerGets, finalFields[Amount.TakerGets].Substract(TakerGets).Abs()}
+                {Amount.TakerPays, finalFields[Amount.TakerPays].Subtract(TakerPays).Abs()},
+                {Amount.TakerGets, finalFields[Amount.TakerGets].Subtract(TakerGets).Abs()}
             };
 
             return executed;

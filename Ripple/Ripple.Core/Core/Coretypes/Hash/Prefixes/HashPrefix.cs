@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Ripple.Core.Core.Coretypes.Hash.Prefixes
+﻿namespace Ripple.Core.Core.Coretypes.Hash.Prefixes
 {
+    using System.Collections.Generic;
+    using Ripple.Core.Core.Coretypes.UInt;
+
     public class HashPrefix : IPrefix
     {
         private readonly byte[] _bytes;
 
+        private UInt32 uInt32;
+
         private HashPrefix(long i)
         {
-            _bytes = BitConverter.GetBytes(i);
+            this.uInt32 = new UInt32(i);
+            _bytes = this.uInt32.ToByteArray();
         }
 
         /// <summary>
@@ -76,7 +79,15 @@ namespace Ripple.Core.Core.Coretypes.Hash.Prefixes
 
         public byte[] Bytes
         {
-            get { return _bytes; }
+            get { return this._bytes; }
+        }
+
+        public UInt32 UInt32
+        {
+            get
+            {
+                return this.uInt32;
+            }
         }
     }
 }

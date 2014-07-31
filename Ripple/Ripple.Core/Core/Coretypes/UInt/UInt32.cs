@@ -31,7 +31,8 @@ namespace Ripple.Core.Core.Coretypes.UInt
         {
         }
 
-        public static TypeTranslator<UInt32> Translate = new UInt32Translator();
+        public static OutTypeTranslator<UInt32> OutTranslate = new OutUInt32Translator();
+        public static InTypeTranslator<UInt32> InTranslate = new InUInt32Translator();
         public static TypedFields.UInt32Field Flags = new UInt32Field(Field.Flags);
         public static TypedFields.UInt32Field SourceTag = new UInt32Field(Field.SourceTag);
         public static TypedFields.UInt32Field Sequence = new UInt32Field(Field.Sequence);
@@ -82,25 +83,25 @@ namespace Ripple.Core.Core.Coretypes.UInt
 
         public override object ToJson()
         {
-            return Translate.ToJson(this);
+            return InTranslate.ToJson(this);
         }
 
         public override byte[] ToBytes()
         {
-            return Translate.ToBytes(this);
+            return InTranslate.ToBytes(this);
         }
 
         public override string ToHex()
         {
-            return Translate.ToHex(this);
+            return InTranslate.ToHex(this);
         }
 
         public override void ToBytesSink(IBytesSink to)
         {
-            Translate.ToBytesSink(this, to);
+            InTranslate.ToBytesSink(this, to);
         }
 
-        private class UInt32Translator : UIntTranslator<UInt32>
+        private class OutUInt32Translator : OutUIntTranslator<UInt32>
         {
             public override UInt32 NewInstance(BigInteger i)
             {
@@ -111,6 +112,10 @@ namespace Ripple.Core.Core.Coretypes.UInt
             {
                 return 4;
             }
+        }
+
+        private class InUInt32Translator : InUIntTranslator<UInt32>
+        {
         }
 
         private class UInt32Field : TypedFields.UInt32Field
